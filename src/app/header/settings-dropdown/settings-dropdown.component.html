@@ -1,14 +1,9 @@
-<div class="flex items-center space-x-4 ml-auto cursor-pointer">
-  <img class="w-10 h-10 rounded-full" src="assets/avatar.png" alt="" />
-  <div class="font-medium">
-    <div>{{ user.firstName + " " + user.lastName }}</div>
-    <div class="text-sm text-gray-500 dark:text-gray-400">Student</div>
-  </div>
-  <img src="assets/icons/chevron-down.svg" />
-</div>
+<mat-icon>{{ selectedOption.icon }}</mat-icon>
+<span class="name">{{ selectedOption.name }}</span>
+<img src="assets/icons/chevron-down.svg" class="chevron" />
 
 <ul
-  #settingsDropdown
+  #settingsdropdown
   *ngIf="open"
   class="dropdown absolute z-[1000] float-left m-0 min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base"
 >

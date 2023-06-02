@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +9,18 @@ import { Component } from '@angular/core';
     class: 'backdrop-blur',
   },
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  constructor(private authService: AuthService) {}
+
+  get loggedUser() {
+    return this.authService.loggedUser;
+  }
+
+  openLoginDialog() {
+    this.authService.openLoginDialog();
+  }
+
+  openRegisterDialog() {
+    this.authService.openRegisterDialog();
+  }
+}

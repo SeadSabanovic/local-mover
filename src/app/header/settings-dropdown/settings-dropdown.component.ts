@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  Input,
-  ViewChild,
-} from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 export interface Option {
   name: string;
@@ -13,13 +6,17 @@ export interface Option {
 }
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  selector: 'app-settings-dropdown',
+  templateUrl: './settings-dropdown.component.html',
+  styleUrls: ['./settings-dropdown.component.scss'],
 })
-export class UserComponent {
-  @ViewChild('settingsDropdown', { static: false }) dropdownEL!: ElementRef;
+export class SettingsDropdownComponent {
+  @ViewChild('settingsdropdown', { static: false }) dropdownEL!: ElementRef;
   open = false;
+  selectedOption: Option = {
+    name: 'Logout',
+    icon: 'logout',
+  };
   options: Option[] = [
     {
       name: 'Logout',
@@ -27,10 +24,9 @@ export class UserComponent {
     },
   ];
 
-  @Input() user;
-
   @HostListener('document:click', ['$event'])
   clickout(event: Event) {
+    console.log(event);
     if (!this.eRef.nativeElement.contains(event.target) && this.open) {
       this.open = false;
     } else if (
@@ -44,12 +40,10 @@ export class UserComponent {
     }
   }
 
-  constructor(private eRef: ElementRef, private authService: AuthService) {}
+  constructor(private eRef: ElementRef) {}
 
   setOption(option: Option) {
+    this.selectedOption = option;
     this.open = false;
-    if (option.name === 'Logout') {
-      this.authService.logout();
-    }
   }
 }
